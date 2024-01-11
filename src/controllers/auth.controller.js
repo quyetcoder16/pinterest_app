@@ -52,7 +52,35 @@ const signIn = async (req, res) => {
     }
 }
 
+const loginWithFacebook = async (req, res) => {
+    try {
+        const { email, name, picture, userID } = req.body;
+        let user = await getUserByEmailServices(email);
+        if (!user) {
+            await createUserServices({
+                email,
+                full_name: name,
+                avatar: picture.data.url
+            });
+            user = await getUserByEmailServices(email);
+            const token = createToken({
+                email: user.email
+            });
+            res.status(201).send(token);
+        } else {
+            const token = createToken({
+                email: user.email
+            });
+            res.status(200).send(token);
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
 export {
     signUp,
     signIn,
+    loginWithFacebook,
 }
