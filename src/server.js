@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import rootRouter from "./routers/root.router.js";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.use(cors({
     methods: ["GET", "PUT", "POST", "DELETE"]
 }));
 app.use(express.json());
+app.use(rootRouter);
 
 const PORT = process.env.PORT || 5000;
 
