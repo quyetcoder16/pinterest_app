@@ -57,11 +57,12 @@ const loginWithFacebook = async (req, res) => {
         const { email, name, picture, userID } = req.body;
         let user = await getUserByEmailServices(email);
         if (!user) {
-            await createUserServices({
+            const newUser = {
                 email,
                 full_name: name,
                 avatar: picture.data.url
-            });
+            };
+            await createUserServices(newUser);
             user = await getUserByEmailServices(email);
             const token = createToken({
                 email: user.email
