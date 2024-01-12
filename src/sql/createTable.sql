@@ -7,31 +7,31 @@ CREATE TABLE users(
 	password VARCHAR(255),
 	full_name VARCHAR(255),
 	age INT,
-	avatar VARCHAR(255)
+	avatar VARCHAR(255),
+	introduce VARCHAR(255),
+	link_user_info VARCHAR(255),
+	user_name VARCHAR(255)
 );
 
-INSERT INTO users (email, password, full_name, age, avatar)
-VALUES 
-('user1@example.com', 'password1', 'John Doe', 25, 'https://example.com/avatar1.jpg'),
-('user2@example.com', 'password2', 'Jane Smith', 30, 'https://example.com/avatar2.jpg'),
-('user3@example.com', 'password3', 'Bob Johnson', 22, 'https://example.com/avatar3.jpg'),
-('user4@example.com', 'password4', 'Alice Brown', 28, 'https://example.com/avatar4.jpg'),
-('user5@example.com', 'password5', 'Charlie White', 35, 'https://example.com/avatar5.jpg'),
-('user6@example.com', 'password6', 'Diana Black', 27, 'https://example.com/avatar6.jpg'),
-('user7@example.com', 'password7', 'Evan Green', 32, 'https://example.com/avatar7.jpg'),
-('user8@example.com', 'password8', 'Fiona Grey', 24, 'https://example.com/avatar8.jpg'),
-('user9@example.com', 'password9', 'George Red', 29, 'https://example.com/avatar9.jpg'),
-('user10@example.com', 'password10', 'Helen Blue', 31, 'https://example.com/avatar10.jpg'),
-('user11@example.com', 'password11', 'Ian Purple', 26, 'https://example.com/avatar11.jpg'),
-('user12@example.com', 'password12', 'Jenny Orange', 33, 'https://example.com/avatar12.jpg'),
-('user13@example.com', 'password13', 'Kevin Yellow', 23, 'https://example.com/avatar13.jpg'),
-('user14@example.com', 'password14', 'Linda Pink', 27, 'https://example.com/avatar14.jpg'),
-('user15@example.com', 'password15', 'Mike Brown', 30, 'https://example.com/avatar15.jpg'),
-('user16@example.com', 'password16', 'Nancy Grey', 28, 'https://example.com/avatar16.jpg'),
-('user17@example.com', 'password17', 'Oscar Black', 26, 'https://example.com/avatar17.jpg'),
-('user18@example.com', 'password18', 'Pamela Green', 29, 'https://example.com/avatar18.jpg'),
-('user19@example.com', 'password19', 'Quincy White', 34, 'https://example.com/avatar19.jpg'),
-('user20@example.com', 'password20', 'Rachel Red', 25, 'https://example.com/avatar20.jpg');
+-- Chèn 15 dòng dữ liệu vào bảng users
+INSERT INTO users (email, password, full_name, age, avatar, introduce, link_user_info, user_name) VALUES
+('john.doe@example.com', 'hashed_password1', 'John Doe', 25, 'avatar1.jpg', 'Hello, I am John!', 'https://example.com/johndoe', 'johndoe'),
+('jane.smith@example.com', 'hashed_password2', 'Jane Smith', 30, 'avatar2.jpg', 'Nice to meet you!', 'https://example.com/janesmith', 'janesmith'),
+('bob.johnson@example.com', 'hashed_password3', 'Bob Johnson', 22, 'avatar3.jpg', 'I love programming.', 'https://example.com/bobjohnson', 'bobjohnson'),
+-- Thêm dữ liệu khác ở đây
+('alice.williams@example.com', 'hashed_password4', 'Alice Williams', 28, 'avatar4.jpg', 'Software engineer and photographer.', 'https://example.com/alicewilliams', 'alicewilliams'),
+('charlie.brown@example.com', 'hashed_password5', 'Charlie Brown', 35, 'avatar5.jpg', 'Coffee lover and adventurer.', 'https://example.com/charliebrown', 'charliebrown'),
+('emma.davis@example.com', 'hashed_password6', 'Emma Davis', 29, 'avatar6.jpg', 'Exploring the world, one city at a time.', 'https://example.com/emmadavis', 'emmadavis'),
+('david.wilson@example.com', 'hashed_password7', 'David Wilson', 27, 'avatar7.jpg', 'Passionate about technology and innovation.', 'https://example.com/davidwilson', 'davidwilson'),
+('grace.miller@example.com', 'hashed_password8', 'Grace Miller', 32, 'avatar8.jpg', 'Yoga enthusiast and nature lover.', 'https://example.com/gracemiller', 'gracemiller'),
+('james.lee@example.com', 'hashed_password9', 'James Lee', 26, 'avatar9.jpg', 'Web developer by day, gamer by night.', 'https://example.com/jameslee', 'jameslee'),
+('olivia.white@example.com', 'hashed_password10', 'Olivia White', 31, 'avatar10.jpg', 'Bookworm and aspiring writer.', 'https://example.com/oliviawhite', 'oliviawhite'),
+('michael.taylor@example.com', 'hashed_password11', 'Michael Taylor', 23, 'avatar11.jpg', 'Fitness freak and nutrition advocate.', 'https://example.com/michaeltaylor', 'michaeltaylor'),
+('sophia.martin@example.com', 'hashed_password12', 'Sophia Martin', 33, 'avatar12.jpg', 'Art lover and creative soul.', 'https://example.com/sophiamartin', 'sophiamartin'),
+('william.anderson@example.com', 'hashed_password13', 'William Anderson', 30, 'avatar13.jpg', 'Traveling and exploring new cultures.', 'https://example.com/williamanderson', 'williamanderson'),
+('emily.harris@example.com', 'hashed_password14', 'Emily Harris', 28, 'avatar14.jpg', 'Graphic designer with a passion for color.', 'https://example.com/emilyharris', 'emilyharris'),
+('daniel.moore@example.com', 'hashed_password15', 'Daniel Moore', 34, 'avatar15.jpg', 'Tech geek and aspiring entrepreneur.', 'https://example.com/danielmoore', 'danielmoore');
+
 
 
 
@@ -42,26 +42,29 @@ CREATE TABLE images(
 	commenting_right BOOLEAN,
 	description VARCHAR(255),
 	user_id INT,
-	FOREIGN KEY(user_id) REFERENCES users(user_id)
+	FOREIGN KEY(user_id) REFERENCES users(user_id),
+	title VARCHAR(255),
+	link_web_datail VARCHAR(255)
 );
 
-INSERT INTO images (image_name, url, commenting_right, description, user_id)
-VALUES 
-('Image 1', 'https://example.com/image1.jpg', true, 'Beautiful sunset', 1),
-('Image 2', 'https://example.com/image2.jpg', true, 'City skyline', 2),
-('Image 3', 'https://example.com/image3.jpg', false, 'Snowy mountains', 3),
-('Image 4', 'https://example.com/image4.jpg', true, 'Beach paradise', 4),
-('Image 5', 'https://example.com/image5.jpg', true, 'Lush green forest', 5),
-('Image 6', 'https://example.com/image6.jpg', false, 'Urban street art', 6),
-('Image 7', 'https://example.com/image7.jpg', true, 'Desert dunes', 7),
-('Image 8', 'https://example.com/image8.jpg', false, 'Vibrant city lights', 8),
-('Image 9', 'https://example.com/image9.jpg', true, 'Countryside landscape', 9),
-('Image 10', 'https://example.com/image10.jpg', false, 'Abstract art', 10),
-('Image 11', 'https://example.com/image11.jpg', true, 'Mountain lake', 11),
-('Image 12', 'https://example.com/image12.jpg', true, 'Colorful flowers', 12),
-('Image 13', 'https://example.com/image13.jpg', false, 'Ancient ruins', 13),
-('Image 14', 'https://example.com/image14.jpg', true, 'Foggy morning', 14),
-('Image 15', 'https://example.com/image15.jpg', true, 'Historical architecture', 15);
+-- Chèn 15 dòng dữ liệu vào bảng images
+INSERT INTO images (image_name, url, commenting_right, description, user_id, title, link_web_datail) VALUES
+('Sunset Over the Mountains', 'https://example.com/sunset_mountains.jpg', TRUE, 'A breathtaking sunset over the mountain range.', 1, 'Mountain Sunset', 'https://example.com/mountain_sunset'),
+('City Skyline at Night', 'https://example.com/city_skyline_night.jpg', FALSE, 'The city skyline illuminated by city lights at night.', 2, 'City Night Lights', 'https://example.com/city_night_lights'),
+('Playful Puppy in the Garden', 'https://example.com/playful_puppy.jpg', TRUE, 'An adorable puppy playing in a vibrant garden.', 3, 'Garden Pup', 'https://example.com/garden_pup'),
+('Colorful Abstract Artwork', 'https://example.com/colorful_abstract.jpg', TRUE, 'Vibrant and abstract artwork with a splash of colors.', 4, 'Abstract Colors', 'https://example.com/abstract_colors'),
+('Ocean Sunrise', 'https://example.com/ocean_sunrise.jpg', FALSE, 'A breathtaking sunrise over the calm ocean waters.', 5, 'Sunrise Serenity', 'https://example.com/sunrise_serenity'),
+('Urban Noir Street Photography', 'https://example.com/urban_noir.jpg', TRUE, 'Classic black and white street photography in an urban setting.', 6, 'Urban Noir', 'https://example.com/urban_noir_detail'),
+('Cute Kittens Cuddling', 'https://example.com/cute_kittens.jpg', FALSE, 'Two adorable kittens cuddling together in a cozy spot.', 7, 'Cozy Kittens', 'https://example.com/cozy_kittens_detail'),
+('Majestic Eagle Soaring', 'https://example.com/majestic_eagle.jpg', TRUE, 'A majestic eagle soaring through the vast sky.', 8, 'Sky Majesty', 'https://example.com/sky_majesty'),
+('Rolling Hills Landscape', 'https://example.com/rolling_hills.jpg', TRUE, 'A picturesque landscape with rolling hills and greenery.', 9, 'Rolling Hills Beauty', 'https://example.com/rolling_hills_beauty'),
+('Modern Architecture in City', 'https://example.com/modern_architecture.jpg', FALSE, 'Modern architectural marvels in a bustling city.', 10, 'Urban Marvels', 'https://example.com/urban_marvels'),
+('Delicious Homemade Desserts', 'https://example.com/homemade_desserts.jpg', TRUE, 'A tempting display of delicious homemade desserts.', 11, 'Sweet Delights', 'https://example.com/sweet_delights'),
+('Playful Dolphins in Clear Waters', 'https://example.com/playful_dolphins.jpg', FALSE, 'Playful dolphins swimming in crystal-clear waters.', 12, 'Dolphin Playtime', 'https://example.com/dolphin_playtime'),
+('Abstract Sculpture in Museum', 'https://example.com/abstract_sculpture.jpg', TRUE, 'An intriguing abstract sculpture in a contemporary art museum.', 13, 'Sculpture Exploration', 'https://example.com/sculpture_exploration'),
+('Enchanting Forest in Autumn', 'https://example.com/forest_autumn.jpg', TRUE, 'An enchanting forest adorned with vibrant autumn colors.', 14, 'Autumn Fantasy', 'https://example.com/autumn_fantasy'),
+('Vintage Car Exhibition', 'https://example.com/vintage_car_exhibition.jpg', FALSE, 'Classic automobiles showcased at a vintage car exhibition.', 15, 'Vintage Classics', 'https://example.com/vintage_classics');
+
 
 
 CREATE TABLE comments(
@@ -74,18 +77,20 @@ CREATE TABLE comments(
 	content VARCHAR(255)
 );
 
-INSERT INTO comments (user_id, image_id, date_comment, content)
-VALUES 
-(1, 1, '2024-01-11', 'Great shot!'),
-(2, 2, '2024-01-10', 'Love the city lights!'),
-(3, 3, '2024-01-09', 'The snowy mountains look amazing.'),
-(4, 4, '2024-01-08', 'Wish I could be at that beach right now.'),
-(5, 5, '2024-01-07', 'The forest is so peaceful.'),
-(6, 6, '2024-01-06', 'Interesting street art!'),
-(7, 7, '2024-01-05', 'The desert is so vast and beautiful.'),
-(8, 8, '2024-01-04', 'The city lights are mesmerizing.'),
-(9, 9, '2024-01-03', 'The countryside looks so serene.'),
-(10, 10, '2024-01-02', 'This abstract art is thought-provoking.');
+-- Chèn 12 dòng dữ liệu vào bảng comments
+INSERT INTO comments (user_id, image_id, date_comment, content) VALUES
+(1, 1, '2022-01-01', 'Amazing shot!'),
+(2, 1, '2022-01-02', 'I love the colors in this picture.'),
+(3, 2, '2022-01-03', 'The city lights are mesmerizing.'),
+(4, 3, '2022-01-04', 'What a cute puppy!'),
+(5, 4, '2022-01-05', 'This abstract artwork is mind-blowing.'),
+(6, 5, '2022-01-06', 'The sunrise by the ocean is breathtaking.'),
+(7, 6, '2022-01-07', 'Great use of black and white in this photo.'),
+(8, 7, '2022-01-08', 'Aww, those kittens are adorable!'),
+(9, 8, '2022-01-09', 'The eagle looks majestic in flight.'),
+(10, 9, '2022-01-10', 'The rolling hills are so peaceful.'),
+(11, 10, '2022-01-11', 'Modern architecture at its finest.'),
+(12, 11, '2022-01-12', 'Those desserts look delicious!');
 
 
 
@@ -98,15 +103,17 @@ CREATE TABLE savedImages(
 	data_saved DATE
 );
 
-INSERT INTO savedImages (user_id, image_id, data_saved)
-VALUES 
-(1, 1, '2024-01-11'),
-(2, 2, '2024-01-10'),
-(3, 3, '2024-01-09'),
-(4, 4, '2024-01-08'),
-(5, 5, '2024-01-07'),
-(6, 6, '2024-01-06'),
-(7, 7, '2024-01-05'),
-(8, 8, '2024-01-04'),
-(9, 9, '2024-01-03'),
-(10, 10, '2024-01-02');
+-- Chèn 10 dòng dữ liệu vào bảng savedImages
+INSERT INTO savedImages (user_id, image_id, data_saved) VALUES
+(1, 1, '2022-01-01'),
+(2, 3, '2022-01-02'),
+(3, 5, '2022-01-03'),
+(4, 7, '2022-01-04'),
+(5, 9, '2022-01-05'),
+(6, 11, '2022-01-06'),
+(7, 13, '2022-01-07'),
+(8, 15, '2022-01-08'),
+(9, 2, '2022-01-09'),
+(10, 4, '2022-01-10');
+
+

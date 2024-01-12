@@ -27,6 +27,8 @@ model images {
   commenting_right Boolean?
   description      String?       @db.VarChar(255)
   user_id          Int?
+  title            String?       @db.VarChar(255)
+  link_web_datail  String?       @db.VarChar(255)
   comments         comments[]
   users            users?        @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "images_ibfk_1")
   savedImages      savedImages[]
@@ -47,13 +49,16 @@ model savedImages {
 }
 
 model users {
-  user_id     Int           @id @default(autoincrement())
-  email       String?       @db.VarChar(255)
-  password    String?       @db.VarChar(255)
-  full_name   String?       @db.VarChar(255)
-  age         Int?
-  avatar      String?       @db.VarChar(255)
-  comments    comments[]
-  images      images[]
-  savedImages savedImages[]
+  user_id        Int           @id @default(autoincrement())
+  email          String?       @db.VarChar(255)
+  password       String?       @db.VarChar(255)
+  full_name      String?       @db.VarChar(255)
+  age            Int?
+  avatar         String?       @db.VarChar(255)
+  introduce      String?       @db.VarChar(255)
+  link_user_info String?       @db.VarChar(255)
+  user_name      String?       @db.VarChar(255)
+  comments       comments[]
+  images         images[]
+  savedImages    savedImages[]
 }
