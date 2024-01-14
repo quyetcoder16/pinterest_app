@@ -1,3 +1,5 @@
+import { sendResponse } from "../utils/sendResponse.js";
+
 const getDetailUser = (req, res) => {
     try {
         const { email, full_name, age, avatar, introduce, link_user_info, user_name } = req.user;
@@ -10,7 +12,7 @@ const getDetailUser = (req, res) => {
             link_user_info,
             user_name
         };
-        res.status(200).send(user);
+        sendResponse(res, 200, "detail user", user);
     } catch (error) {
         console.log(error);
         res.status(500).send(error);
