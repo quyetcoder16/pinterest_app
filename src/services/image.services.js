@@ -14,6 +14,20 @@ const getDetailImageByImageIdServices = async (imageId) => {
     }
 }
 
+const getListImageServices = async (page, size) => {
+    const index = (Number(page) - 1) * (Number(size));
+    const listImage = await prisma.images.findMany({
+        take: +size,
+        skip: index
+    });
+    if (listImage) {
+        return listImage;
+    } else {
+        return false;
+    }
+}
+
 export {
     getDetailImageByImageIdServices,
+    getListImageServices,
 }

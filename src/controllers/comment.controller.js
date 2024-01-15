@@ -1,6 +1,7 @@
 
 
 import { deleteCommentServices, getCommentByImageIdServices, getCommentDetailByCommentIdSerVices, postRecordCommentServices } from "../services/comment.services.js";
+import { getDetailImageByImageIdServices } from "../services/image.services.js";
 
 import { getCurrentDateTime } from "../utils/getCurrentDateTime.js";
 import { sendResponse } from "../utils/sendResponse.js";
@@ -25,14 +26,20 @@ const postRecordComment = async (req, res) => {
     try {
         const { userId, imageId, content } = req.body;
         const formattedDate = getCurrentDateTime();
-        const newComment = {
-            user_id: userId,
-            image_id: imageId,
-            content: content,
-            date_comment: formattedDate
-        };
-        await postRecordCommentServices(newComment);
-        sendResponse(res, 201, "record comment successful!");
+        const image = await getDetailImageByImageIdServices(imageId);
+        if (image.commenting_right) {
+            const newComment = {
+                user_id: userId,
+                image_id: imageId,
+                content: content,
+                date_comment: formattedDate
+            };
+            await postRecordCommentServices(newComment);
+            sendResponse(res, 201, "record comment successful!");
+        } else {
+            sendResponse(res, 401, "image can't comment");
+        }
+
     } catch (error) {
         console.log(error);
         sendResponse(res, 500, error);
