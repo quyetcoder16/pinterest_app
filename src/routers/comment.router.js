@@ -1,5 +1,6 @@
 import express from "express";
 import { deleteComment, getCommentByImageId, postRecordComment } from "../controllers/comment.controller.js";
+
 import { authTokenMiddleware } from "../middlewares/auth.middleware.js";
 import { checkUserId } from "../middlewares/checkUserId.middleware.js";
 
