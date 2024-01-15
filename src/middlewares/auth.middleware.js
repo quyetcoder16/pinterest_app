@@ -1,5 +1,6 @@
 import { checkToken } from "../configs/jwt.config.js";
 import { getUserByEmailServices } from "../services/user.services.js";
+import { sendResponse } from "../utils/sendResponse.js";
 
 const authTokenMiddleware = async (req, res, next) => {
     try {
@@ -8,7 +9,7 @@ const authTokenMiddleware = async (req, res, next) => {
             const tokenVerify = checkToken(token);
             // res.send(tokenVerify);
             if (tokenVerify.statusCode === 401) {
-                res.status(401).send("token invalid!");
+                sendResponse(res, 401, "token invalid!");
             } else {
                 const { email } = tokenVerify.data;
                 const user = await getUserByEmailServices(email);
@@ -17,15 +18,15 @@ const authTokenMiddleware = async (req, res, next) => {
                     req.user_id = user.user_id;
                     next();
                 } else {
-                    res.status(401).send("token invalid!");
+                    sendResponse(res, 401, "token invalid!");
                 }
             }
         } else {
-            res.status(404).send("token not found!");
+            sendResponse(res, 404, "token not found!");
         }
 
     } catch (error) {
-        res.status(500).send(error);
+        sendResponse(res, 500, error);
         console.log(error);
     }
 }

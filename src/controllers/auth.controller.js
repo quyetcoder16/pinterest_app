@@ -1,17 +1,18 @@
 import bcrypt from "bcrypt";
 import { createUserServices, getUserByEmailServices } from "../services/user.services.js";
 import { createToken } from "../configs/jwt.config.js";
+import { sendResponse } from "../utils/sendResponse.js";
 
 const signUp = async (req, res) => {
     try {
         const { email, password, full_name, age } = req.body;
         if (email == "") {
-            res.status(400).send("email error!");
+            sendResponse(res, 400, "email error!");
             return;
         }
         const user = await getUserByEmailServices(email);
         if (user) {
-            res.status(400).send("email exist!");
+            sendResponse(res, 400, "email exist!");
         } else {
             const hashPass = bcrypt.hashSync(password, 10);
             let newUser = {
@@ -21,10 +22,10 @@ const signUp = async (req, res) => {
                 age
             }
             await createUserServices(newUser);
-            res.status(201).send("sign up successful!");
+            sendResponse(res, 200, "sign up successful!");
         }
     } catch (error) {
-        res.status(500).send(error);
+        sendResponse(res, 500, error);
         console.log(error);
     }
 }
@@ -34,20 +35,20 @@ const signIn = async (req, res) => {
         const { email, password } = req.body;
         const user = await getUserByEmailServices(email);
         if (!user) {
-            res.status(404).send("Email not found!");
+            sendResponse(res, 404, "Email not found!");
         } else {
             let checkPass = bcrypt.compareSync(password, user.password);
             if (checkPass) {
                 const token = createToken({
                     email
                 });
-                res.status(200).send(token);
+                sendResponse(res, 200, "token", token);
             } else {
-                res.status(400).send("password error!");
+                sendResponse(res, 400, "password error!");
             }
         }
     } catch (error) {
-        res.status(500).send(error);
+        sendResponse(res, 500, error);
         console.log(error);
     }
 }
@@ -67,16 +68,16 @@ const loginWithFacebook = async (req, res) => {
             const token = createToken({
                 email: user.email
             });
-            res.status(201).send(token);
+            sendResponse(res, 201, "token", token);
         } else {
             const token = createToken({
                 email: user.email
             });
-            res.status(200).send(token);
+            sendResponse(res, 200, "token", token);
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send(error);
+        sendResponse(res, 500, error);
     }
 }
 
