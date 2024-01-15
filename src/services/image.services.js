@@ -27,7 +27,46 @@ const getListImageServices = async (page, size) => {
     }
 }
 
+const getListImageByNameServices = async (name) => {
+    const listImage = await prisma.images.findMany({
+        where: {
+            image_name: {
+                contains: name
+            }
+        }
+    });
+    if (listImage) {
+        return listImage;
+    } else {
+        return false;
+    }
+}
+
+const getListImageCreatedByUserIdServices = async (userId) => {
+    const listImageCreateByUser = await prisma.images.findMany({
+        where: {
+            user_id: +userId
+        }
+    });
+    if (listImageCreateByUser) {
+        return listImageCreateByUser;
+    } else {
+        return false;
+    }
+}
+
+const deleteImageByImageIdServices = async (imageId) => {
+    await prisma.images.delete({
+        where: {
+            image_id: +imageId
+        }
+    });
+}
+
 export {
     getDetailImageByImageIdServices,
     getListImageServices,
+    getListImageByNameServices,
+    getListImageCreatedByUserIdServices,
+    deleteImageByImageIdServices,
 }

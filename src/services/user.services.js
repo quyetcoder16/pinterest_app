@@ -14,13 +14,28 @@ const getUserByEmailServices = async (email) => {
     }
 }
 
+const getUserByUserIdServices = async (userId) => {
+    const user = await prisma.users.findFirst({
+        where: {
+            user_id: +userId
+        }
+    });
+    if (user) {
+        return user;
+    } else {
+        return false;
+    }
+}
+
 const createUserServices = async (newUser) => {
     await prisma.users.create({
         data: newUser
     });
 }
 
+
 export {
     getUserByEmailServices,
     createUserServices,
+    getUserByUserIdServices,
 }

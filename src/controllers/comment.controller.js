@@ -1,5 +1,3 @@
-
-
 import { deleteCommentServices, getCommentByImageIdServices, getCommentDetailByCommentIdSerVices, postRecordCommentServices } from "../services/comment.services.js";
 import { getDetailImageByImageIdServices } from "../services/image.services.js";
 
