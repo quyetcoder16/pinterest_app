@@ -1,4 +1,4 @@
-import { getCommentByImageIdServices, postRecordCommentServices } from "../services/comment.services.js";
+import { deleteCommentServices, getCommentByImageIdServices, getCommentDetailByCommentIdSerVices, postRecordCommentServices } from "../services/comment.services.js";
 import { getCurrentDateTime } from "../utils/getCurrentDateTime.js";
 import { sendResponse } from "../utils/sendResponse.js";
 
@@ -36,7 +36,28 @@ const postRecordComment = async (req, res) => {
     }
 }
 
+const deleteComment = async (req, res) => {
+    try {
+        const { commentId, userId } = req.body;
+        const comment = await getCommentDetailByCommentIdSerVices(commentId);
+        if (!comment) {
+            sendResponse(res, 404, "comment not found!");
+        } else {
+            if (comment.user_id == userId) {
+                await deleteCommentServices(commentId);
+                sendResponse(res, 200, "delete comment successful!");
+            } else {
+                sendResponse(res, 401, "The user does not have permission to delete");
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        sendResponse(res, 500, error);
+    }
+}
+
 export {
     getCommentByImageId,
     postRecordComment,
+    deleteComment,
 }

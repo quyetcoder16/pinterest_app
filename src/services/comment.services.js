@@ -1,6 +1,19 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
 
+const getCommentDetailByCommentIdSerVices = async (commentId) => {
+    const comment = await prisma.comments.findFirst({
+        where: {
+            comment_id: +commentId
+        }
+    });
+    if (comment) {
+        return comment;
+    } else {
+        return false;
+    }
+}
+
 const getCommentByImageIdServices = async (imageId) => {
     const listComment = await prisma.comments.findMany({
         where: {
@@ -20,7 +33,17 @@ const postRecordCommentServices = async (newComment) => {
     });
 }
 
+const deleteCommentServices = async (commentId) => {
+    await prisma.comments.delete({
+        where: {
+            comment_id: +commentId
+        }
+    });
+}
+
 export {
     getCommentByImageIdServices,
     postRecordCommentServices,
+    getCommentDetailByCommentIdSerVices,
+    deleteCommentServices,
 }
