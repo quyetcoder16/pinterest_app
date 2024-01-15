@@ -33,6 +33,7 @@ const postRecordCommentServices = async (newComment) => {
     });
 }
 
+
 const deleteCommentServices = async (commentId) => {
     await prisma.comments.delete({
         where: {
@@ -46,4 +47,5 @@ export {
     postRecordCommentServices,
     getCommentDetailByCommentIdSerVices,
     deleteCommentServices,
+
 }

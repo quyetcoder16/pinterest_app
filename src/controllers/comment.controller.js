@@ -1,4 +1,6 @@
+
 import { deleteCommentServices, getCommentByImageIdServices, getCommentDetailByCommentIdSerVices, postRecordCommentServices } from "../services/comment.services.js";
+
 import { getCurrentDateTime } from "../utils/getCurrentDateTime.js";
 import { sendResponse } from "../utils/sendResponse.js";
 
@@ -35,6 +37,7 @@ const postRecordComment = async (req, res) => {
         sendResponse(res, 500, error);
     }
 }
+
 
 const deleteComment = async (req, res) => {
     try {
