@@ -41,10 +41,18 @@ const deleteCommentServices = async (commentId) => {
     });
 }
 
+const deleteCommentByImageIdServices = async (imageId) => {
+    await prisma.comments.deleteMany({
+        where: {
+            image_id: +imageId
+        }
+    })
+}
+
 export {
     getCommentByImageIdServices,
     postRecordCommentServices,
     getCommentDetailByCommentIdSerVices,
     deleteCommentServices,
-
+    deleteCommentByImageIdServices,
 }

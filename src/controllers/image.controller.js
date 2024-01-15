@@ -1,4 +1,6 @@
+import { deleteCommentByImageIdServices } from "../services/comment.services.js";
 import { deleteImageByImageIdServices, getDetailImageByImageIdServices, getListImageByNameServices, getListImageCreatedByUserIdServices, getListImageServices } from "../services/image.services.js";
+import { deleteSaveImagesByImageIdServices } from "../services/savedImage.services.js";
 import { getUserByUserIdServices } from "../services/user.services.js";
 import { sendResponse } from "../utils/sendResponse.js"
 
@@ -78,6 +80,8 @@ const deleteImageByImageId = async (req, res) => {
         const { userId, imageId } = req.body;
         const image = await getDetailImageByImageIdServices(imageId);
         if (image.user_id == userId) {
+            await deleteCommentByImageIdServices(imageId);
+            await deleteSaveImagesByImageIdServices(imageId);
             await deleteImageByImageIdServices(imageId);
             sendResponse(res, 200, "delete image successful");
         } else {
