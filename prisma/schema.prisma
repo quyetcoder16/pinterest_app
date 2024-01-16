@@ -28,7 +28,7 @@ model images {
   description      String?       @db.VarChar(255)
   user_id          Int?
   title            String?       @db.VarChar(255)
-  link_web_datail  String?       @db.VarChar(255)
+  link_web_detail  String?       @db.VarChar(255)
   comments         comments[]
   users            users?        @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "images_ibfk_1")
   savedImages      savedImages[]
@@ -40,7 +40,7 @@ model savedImages {
   savedImage_id Int       @id @default(autoincrement())
   user_id       Int?
   image_id      Int?
-  data_saved    DateTime? @db.Date
+  date_saved    DateTime? @db.Date
   users         users?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "savedImages_ibfk_1")
   images        images?   @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "savedImages_ibfk_2")
 

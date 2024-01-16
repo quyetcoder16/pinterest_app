@@ -36,7 +36,7 @@ const getListSavedImageByUserIdService = async (userId) => {
                     commenting_right: true,
                     description: true,
                     title: true,
-                    link_web_datail: true
+                    link_web_detail: true
                 }
             }
         }
@@ -49,8 +49,25 @@ const getListSavedImageByUserIdService = async (userId) => {
     }
 }
 
+const savedImageServices = async (newSavedImage) => {
+    await prisma.savedImages.create({
+        data: newSavedImage
+    });
+}
+
+const unsavedImageServices = async (userId, imageId) => {
+    await prisma.savedImages.deleteMany({
+        where: {
+            user_id: +userId,
+            image_id: +imageId
+        }
+    });
+}
+
 export {
     deleteSaveImagesByImageIdServices,
     getCheckUserSavedImageServices,
     getListSavedImageByUserIdService,
+    savedImageServices,
+    unsavedImageServices,
 }

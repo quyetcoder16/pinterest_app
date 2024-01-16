@@ -44,11 +44,11 @@ CREATE TABLE images(
 	user_id INT,
 	FOREIGN KEY(user_id) REFERENCES users(user_id),
 	title VARCHAR(255),
-	link_web_datail VARCHAR(255)
+	link_web_detail VARCHAR(255)
 );
 
 -- Chèn 15 dòng dữ liệu vào bảng images
-INSERT INTO images (image_name, url, commenting_right, description, user_id, title, link_web_datail) VALUES
+INSERT INTO images (image_name, url, commenting_right, description, user_id, title, link_web_detail) VALUES
 ('Sunset Over the Mountains', 'https://example.com/sunset_mountains.jpg', TRUE, 'A breathtaking sunset over the mountain range.', 1, 'Mountain Sunset', 'https://example.com/mountain_sunset'),
 ('City Skyline at Night', 'https://example.com/city_skyline_night.jpg', FALSE, 'The city skyline illuminated by city lights at night.', 2, 'City Night Lights', 'https://example.com/city_night_lights'),
 ('Playful Puppy in the Garden', 'https://example.com/playful_puppy.jpg', TRUE, 'An adorable puppy playing in a vibrant garden.', 3, 'Garden Pup', 'https://example.com/garden_pup'),
@@ -100,11 +100,11 @@ CREATE TABLE savedImages(
 	FOREIGN KEY(user_id) REFERENCES users(user_id),
 	image_id INT,
 	FOREIGN KEY(image_id) REFERENCES images(image_id),
-	data_saved DATE
+	date_saved DATE
 );
 
 -- Chèn 10 dòng dữ liệu vào bảng savedImages
-INSERT INTO savedImages (user_id, image_id, data_saved) VALUES
+INSERT INTO savedImages (user_id, image_id, date_saved) VALUES
 (1, 1, '2022-01-01'),
 (2, 3, '2022-01-02'),
 (3, 5, '2022-01-03'),
