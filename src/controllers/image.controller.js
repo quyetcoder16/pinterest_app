@@ -1,3 +1,4 @@
+import cloud from "../configs/cloudinary.config.js";
 import { deleteCommentByImageIdServices } from "../services/comment.services.js";
 import { deleteImageByImageIdServices, getDetailImageByImageIdServices, getListImageByNameServices, getListImageCreatedByUserIdServices, getListImageServices } from "../services/image.services.js";
 import { deleteSaveImagesByImageIdServices } from "../services/savedImage.services.js";
@@ -93,10 +94,32 @@ const deleteImageByImageId = async (req, res) => {
     }
 }
 
+const createImage = async (req, res) => {
+    try {
+        const { title, description, userId, linkWebDetail } = req.body;
+        console.log(req);
+        // cloud.single("fileImage")((req, res, err) => {
+        //     if (err) {
+        //       return res.status(400).json({ error: err.message });
+        //     }
+
+
+        //     const imageUrl = req.file.path;
+
+
+        //     res.json({ imageUrl });
+        //   });
+    } catch (error) {
+        console.log(error);
+        sendResponse(res, 500, error);
+    }
+}
+
 export {
     getListImage,
     getListImageByName,
     getDetailImageByImageId,
     getListImageCreatedByUserId,
     deleteImageByImageId,
+    createImage,
 }
