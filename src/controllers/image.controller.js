@@ -97,7 +97,10 @@ const deleteImageByImageId = async (req, res) => {
 const createImage = async (req, res) => {
     try {
         const { title, description, userId, linkWebDetail } = req.body;
-        console.log(req);
+        // console.log(req);
+        // res.json(req);
+        console.log(req.body.userId);
+        res.send(req.file);
         // cloud.single("fileImage")((req, res, err) => {
         //     if (err) {
         //       return res.status(400).json({ error: err.message });

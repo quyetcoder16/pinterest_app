@@ -11,6 +11,6 @@ imageRouter.get("/get-list-image-by-name", getListImageByName);
 imageRouter.get("/get-detail-image-by-imageId/:imageId", getDetailImageByImageId);
 imageRouter.get("/get-list-image-created-by-userId", authTokenMiddleware, checkUserId, getListImageCreatedByUserId);
 imageRouter.delete("/delete-image-by-imageId", authTokenMiddleware, checkUserId, deleteImageByImageId);
-imageRouter.post("/create-image", authTokenMiddleware, checkUserId, cloud.single("fileImage"), createImage);
+imageRouter.post("/create-image", authTokenMiddleware, checkUserId, cloud.single("file"), createImage);
 
 export default imageRouter;

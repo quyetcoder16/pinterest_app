@@ -4,6 +4,7 @@ import { sendResponse } from "../utils/sendResponse.js";
 
 const authTokenMiddleware = async (req, res, next) => {
     try {
+        console.log(req.body);
         const { token } = req.headers;
         if (token) {
             const tokenVerify = checkToken(token);
