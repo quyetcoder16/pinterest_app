@@ -1,6 +1,6 @@
 import cloud from "../configs/cloudinary.config.js";
 import { deleteCommentByImageIdServices } from "../services/comment.services.js";
-import { deleteImageByImageIdServices, getDetailImageByImageIdServices, getListImageByNameServices, getListImageCreatedByUserIdServices, getListImageServices } from "../services/image.services.js";
+import { createImageServices, deleteImageByImageIdServices, getDetailImageByImageIdServices, getListImageByNameServices, getListImageCreatedByUserIdServices, getListImageServices } from "../services/image.services.js";
 import { deleteSaveImagesByImageIdServices } from "../services/savedImage.services.js";
 import { getUserByUserIdServices } from "../services/user.services.js";
 import { sendResponse } from "../utils/sendResponse.js"
@@ -97,21 +97,22 @@ const deleteImageByImageId = async (req, res) => {
 const createImage = async (req, res) => {
     try {
         const { title, description, userId, linkWebDetail } = req.body;
-        // console.log(req);
-        // res.json(req);
-        console.log(req.body.userId);
-        res.send(req.file);
-        // cloud.single("fileImage")((req, res, err) => {
-        //     if (err) {
-        //       return res.status(400).json({ error: err.message });
-        //     }
+        const fileImage = req.file;
+
+        const newImage = {
+            image_name: fileImage.originalname,
+            url: fileImage.path,
+            commenting_right: true,
+            description,
+            user_id: +userId,
+            title,
+            link_web_detail: linkWebDetail
+        }
+
+        await createImageServices(newImage);
+        sendResponse(res, 201, "create image successful!");
 
 
-        //     const imageUrl = req.file.path;
-
-
-        //     res.json({ imageUrl });
-        //   });
     } catch (error) {
         console.log(error);
         sendResponse(res, 500, error);
