@@ -33,9 +33,19 @@ const createUserServices = async (newUser) => {
     });
 }
 
+const updateUserServices = async (userId, userUpdate) => {
+    await prisma.users.update({
+        where: {
+            user_id: +userId
+        },
+        data: userUpdate
+    });
+}
+
 
 export {
     getUserByEmailServices,
     createUserServices,
     getUserByUserIdServices,
+    updateUserServices,
 }

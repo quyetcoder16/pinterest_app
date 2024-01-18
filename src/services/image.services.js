@@ -63,10 +63,17 @@ const deleteImageByImageIdServices = async (imageId) => {
     });
 }
 
+const createImageServices = async (newImage) => {
+    await prisma.images.create({
+        data: newImage
+    });
+}
+
 export {
     getDetailImageByImageIdServices,
     getListImageServices,
     getListImageByNameServices,
     getListImageCreatedByUserIdServices,
     deleteImageByImageIdServices,
+    createImageServices,
 }

@@ -4,11 +4,9 @@ import { sendResponse } from "../utils/sendResponse.js";
 
 const authTokenMiddleware = async (req, res, next) => {
     try {
-        console.log(req.body);
         const { token } = req.headers;
         if (token) {
             const tokenVerify = checkToken(token);
-            // res.send(tokenVerify);
             if (tokenVerify.statusCode === 401) {
                 sendResponse(res, 401, "token invalid!");
             } else {
