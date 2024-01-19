@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client'
+import { getFileNameImage } from '../utils/getFileNameImage.js';
+import { deleteImageCloud } from '../configs/cloudinary.config.js';
 const prisma = new PrismaClient();
 
 const getDetailImageByImageIdServices = async (imageId) => {
@@ -56,6 +58,9 @@ const getListImageCreatedByUserIdServices = async (userId) => {
 }
 
 const deleteImageByImageIdServices = async (imageId) => {
+    const image = await getDetailImageByImageIdServices(imageId);
+    const fileName = getFileNameImage(image.url);
+    deleteImageCloud(fileName);
     await prisma.images.delete({
         where: {
             image_id: +imageId

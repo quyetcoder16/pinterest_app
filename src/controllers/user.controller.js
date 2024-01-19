@@ -24,7 +24,6 @@ const updateUser = async (req, res) => {
     try {
         const fileAvatar = req.file;
         const { userId, fullName, introduce, linkUserInfo, userName } = req.body;
-
         const userUpdate = {
             full_name: fullName,
             avatar: fileAvatar.path,

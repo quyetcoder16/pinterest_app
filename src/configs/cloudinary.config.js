@@ -18,5 +18,16 @@ const storage = new CloudinaryStorage({
     }
 });
 
+const deleteImageCloud = (fileName) => {
+    try {
+        cloudinary.uploader.destroy(fileName);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const cloud = multer({ storage });
 export default cloud;
+export {
+    deleteImageCloud,
+}

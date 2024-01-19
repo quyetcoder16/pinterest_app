@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client'
+import { getFileNameImage } from '../utils/getFileNameImage.js';
+import { deleteImageCloud } from '../configs/cloudinary.config.js';
 const prisma = new PrismaClient();
 
 const getUserByEmailServices = async (email) => {
@@ -34,6 +36,9 @@ const createUserServices = async (newUser) => {
 }
 
 const updateUserServices = async (userId, userUpdate) => {
+    const user = await getUserByUserIdServices(userId);
+    const fileName = getFileNameImage(user.avatar);
+    deleteImageCloud(fileName);
     await prisma.users.update({
         where: {
             user_id: +userId
