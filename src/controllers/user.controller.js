@@ -15,7 +15,6 @@ const getDetailUser = (req, res) => {
         };
         sendResponse(res, 200, "detail user", user);
     } catch (error) {
-        console.log(error);
         res.status(500).send(error);
     }
 }
@@ -37,7 +36,6 @@ const updateUser = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
         res.status(500).send(error);
     }
 }

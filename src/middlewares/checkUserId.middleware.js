@@ -9,7 +9,6 @@ const checkUserId = (req, res, next) => {
             sendResponse(res, 400, "user info incorrect!");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }

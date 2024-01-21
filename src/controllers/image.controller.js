@@ -15,7 +15,6 @@ const getListImage = async (req, res) => {
             sendResponse(res, 404, "Not Found!");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -30,7 +29,6 @@ const getListImageByName = async (req, res) => {
             sendResponse(res, 404, "can't found image");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -56,7 +54,6 @@ const getDetailImageByImageId = async (req, res) => {
             sendResponse(res, 404, "can't found image!");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -71,7 +68,6 @@ const getListImageCreatedByUserId = async (req, res) => {
             sendResponse(res, 404, "image not found!");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -89,7 +85,6 @@ const deleteImageByImageId = async (req, res) => {
             sendResponse(res, 401, "user can't delete image");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -114,7 +109,6 @@ const createImage = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }

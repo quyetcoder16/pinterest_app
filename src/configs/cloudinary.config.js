@@ -22,7 +22,6 @@ const deleteImageCloud = (fileName) => {
     try {
         cloudinary.uploader.destroy(fileName);
     } catch (error) {
-        console.log(error);
     }
 }
 

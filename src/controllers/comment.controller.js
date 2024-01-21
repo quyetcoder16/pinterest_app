@@ -15,7 +15,6 @@ const getCommentByImageId = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -39,7 +38,6 @@ const postRecordComment = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -60,7 +58,6 @@ const deleteComment = async (req, res) => {
             }
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }

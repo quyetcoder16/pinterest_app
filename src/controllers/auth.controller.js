@@ -6,7 +6,7 @@ import { sendResponse } from "../utils/sendResponse.js";
 const signUp = async (req, res) => {
     try {
         const { email, password, full_name, age } = req.body;
-        if (email == "") {
+        if (!email) {
             sendResponse(res, 400, "email error!");
             return;
         }
@@ -26,7 +26,6 @@ const signUp = async (req, res) => {
         }
     } catch (error) {
         sendResponse(res, 500, error);
-        console.log(error);
     }
 }
 
@@ -49,7 +48,6 @@ const signIn = async (req, res) => {
         }
     } catch (error) {
         sendResponse(res, 500, error);
-        console.log(error);
     }
 }
 
@@ -76,7 +74,6 @@ const loginWithFacebook = async (req, res) => {
             sendResponse(res, 200, "token", token);
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }

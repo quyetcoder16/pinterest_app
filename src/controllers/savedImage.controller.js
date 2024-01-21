@@ -13,7 +13,6 @@ const getCheckUserSavedImage = async (req, res) => {
             sendResponse(res, 200, "image hadn't saved!", false);
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -28,7 +27,6 @@ const getListSavedImageByUserId = async (req, res) => {
             sendResponse(res, 404, "Not found!");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -54,7 +52,6 @@ const savedImage = async (req, res) => {
             sendResponse(res, 404, "image not found!");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }
@@ -75,7 +72,6 @@ const unsavedImage = async (req, res) => {
             sendResponse(res, 404, "image not found!");
         }
     } catch (error) {
-        console.log(error);
         sendResponse(res, 500, error);
     }
 }

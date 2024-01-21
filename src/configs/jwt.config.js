@@ -4,9 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const jwtSecretKey = process.env.SECRET_KEY;
+const expiresIn = process.env.EXPIRESIN;
 
 const createToken = (data) => {
-    const token = jwt.sign(data, jwtSecretKey, { expiresIn: "5m" });
+    const token = jwt.sign(data, jwtSecretKey, { expiresIn: expiresIn });
     return token;
 }
 

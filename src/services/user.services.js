@@ -37,8 +37,10 @@ const createUserServices = async (newUser) => {
 
 const updateUserServices = async (userId, userUpdate) => {
     const user = await getUserByUserIdServices(userId);
-    const fileName = getFileNameImage(user.avatar);
-    deleteImageCloud(fileName);
+    if (user.avatar) {
+        const fileName = getFileNameImage(user.avatar);
+        deleteImageCloud(fileName);
+    }
     await prisma.users.update({
         where: {
             user_id: +userId

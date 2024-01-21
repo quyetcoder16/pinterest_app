@@ -26,7 +26,6 @@ const authTokenMiddleware = async (req, res, next) => {
 
     } catch (error) {
         sendResponse(res, 500, error);
-        console.log(error);
     }
 }
 
